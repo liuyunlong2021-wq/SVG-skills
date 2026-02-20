@@ -1,5 +1,4 @@
-![Uploading 2月20日.jpg…]()
-
+![预览](2 月 20 日.jpg)
 # SVG Animation Engineer (AI Skill)
 
 A highly specialized AI Skill (prompt instruction set) designed to turn any AI Assistant into a **Master SVG Animation Engineer**. It enforces strict generation rules to produce clean, cross-browser compatible, and visually stunning 2.5D geometric vector animations using **pure SVG and CSS Keyframes**.
