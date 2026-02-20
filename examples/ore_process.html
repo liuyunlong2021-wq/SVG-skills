@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 600" width="100%" height="100%">
+    <!-- Definitions for Gradients, Glows, and Reusable Elements -->
+    <defs>
+        <!-- Background Gradient: Industrial Tech feel -->
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#1e293b" />
+            <stop offset="100%" stop-color="#0f172a" />
+        </linearGradient>
+
+        <!-- Glowing effects for the concentrate / valuable minerals -->
+        <filter id="goldGlow">
+            <feGaussianBlur stdDeviation="6" result="coloredBlur" />
+            <feMerge>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+        </filter>
+        <filter id="cyanGlow">
+            <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+            <feMerge>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+        </filter>
+
+        <!-- UI/Tech Grid Pattern -->
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#334155" stroke-width="0.5" opacity="0.3" />
+        </pattern>
+
+        <!-- Liquid Gradient for Flotation -->
+        <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.8" />
+            <stop offset="100%" stop-color="#0284c7" stop-opacity="0.9" />
+        </linearGradient>
+
+        <!-- Thickener Gradient -->
+        <linearGradient id="thickenerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.4" />
+            <stop offset="100%" stop-color="#eab308" stop-opacity="0.9" />
+        </linearGradient>
+    </defs>
+
+    <!-- Complete CSS Animation Rules -->
+    <style>
+        /* Foundational Rotations */
+        .spin {
+            transform-box: fill-box;
+            transform-origin: center center;
+            animation: rotate 4s linear infinite;
+        }
+
+        .spin-slow {
+            transform-box: fill-box;
+            transform-origin: center center;
+            animation: rotate 12s linear infinite;
+        }
+
+        .spin-fast {
+            transform-box: fill-box;
+            transform-origin: center center;
+            animation: rotate 1s linear infinite;
+        }
+
+        .spin-reverse {
+            transform-box: fill-box;
+            transform-origin: center center;
+            animation: rotate-rev 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes rotate-rev {
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+
+        /* Conveyor Belt Movement */
+        .belt-line {
+            stroke-dasharray: 12 8;
+            animation: belt-scroll 0.8s linear infinite;
+        }
+
+        @keyframes belt-scroll {
+            100% {
+                stroke-dashoffset: -20;
+            }
+        }
+
+        /* Stage 1: Crushing (Jaw Action) */
+        .crusher-jaw {
+            transform-box: fill-box;
+            transform-origin: top center;
+            /* Cubic-bezier for a snapping crunch effect */
+            animation: crunch 0.6s cubic-bezier(0.2, 0.8, 0.4, 1) infinite alternate;
+        }
+
+        @keyframes crunch {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(-12deg);
+            }
+        }
+
+        /* Stage 3: Flotation Bubbles */
+        .bubble {
+            transform-box: fill-box;
+            transform-origin: center;
+            animation: floatUp 2s ease-in infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-90px) scale(1.8);
+                opacity: 0;
+            }
+        }
+
+        /* Froth Overflow (Squash & Stretch representation) */
+        .froth {
+            transform-box: fill-box;
+            transform-origin: bottom center;
+            animation: bulge 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes bulge {
+            0% {
+                transform: scaleY(1) scaleX(1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scaleY(1.15) scaleX(0.95);
+                opacity: 1;
+            }
+        }
+
+        /* Stage 4: Thickener Rake sweep */
+        .rake-arm {
+            transform-box: fill-box;
+            transform-origin: top center;
+            animation: rake-sweep 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes rake-sweep {
+            0% {
+                transform: rotate(-10deg);
+            }
+
+            100% {
+                transform: rotate(10deg);
+            }
+        }
+
+        /* Material Flow particles horizontally */
+        .flow-rock {
+            animation: convey 2s linear infinite;
+        }
+
+        @keyframes convey {
+            0% {
+                transform: translateX(0) scale(1.2);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                transform: translateX(200px) scale(0.9);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(220px) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* Drops Falling */
+        .drop {
+            animation: falling 1s cubic-bezier(0.5, 0, 1, 1) infinite;
+        }
+
+        @keyframes falling {
+            0% {
+                transform: translateY(0) scaleY(1);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+                transform: translateY(10px) scaleY(1.2);
+            }
+
+            100% {
+                transform: translateY(80px) scaleY(2);
+                opacity: 0;
+            }
+        }
+
+        /* Hover Glow effect for the final product */
+        .pulse-gold {
+            transform-box: fill-box;
+            transform-origin: center;
+            animation: pulse-g 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-g {
+            0% {
+                transform: scale(0.95);
+            }
+
+            100% {
+                transform: scale(1.05);
+            }
+        }
+    </style>
+
+    <!-- 1. Background & Tech Grid -->
+    <rect width="1600" height="600" fill="url(#bgGradient)" />
+    <rect width="1600" height="600" fill="url(#grid)" />
+
+    <!-- Ground Line / Structural Base -->
+    <path d="M 0 520 L 1600 520" stroke="#334155" stroke-width="4" />
+    <path d="M 0 530 L 1600 530" stroke="#1e293b" stroke-width="8" />
+
+    <!-- Title / Stage Labels -->
+    <g font-family="sans-serif" font-weight="bold" font-size="20" fill="#94a3b8" letter-spacing="2">
+        <text x="120" y="80">1. CRUSHING / 破碎</text>
+        <text x="500" y="80">2. GRINDING / 磨矿</text>
+        <text x="880" y="80">3. FLOTATION / 浮选</text>
+        <text x="1280" y="80">4. THICKENING / 脱水</text>
+    </g>
+
+    <!-- ==========================================
+       STAGE 1: CRUSHING (Jaw Crusher)
+       ========================================== -->
+    <g transform="translate(100, 150)">
+        <!-- Hopper Feed -->
+        <polygon points="50,0 150,0 120,80 80,80" fill="#475569" stroke="#38bdf8" stroke-width="2" />
+        <!-- Incoming Raw Rocks -->
+        <path class="drop" style="animation-duration: 0.8s" d="M 100,20 L 110,35 L 90,40 Z" fill="#94a3b8" />
+        <path class="drop" style="animation-duration: 0.9s; animation-delay: -0.3s" d="M 85,15 L 95,25 L 80,30 Z"
+            fill="#64748b" />
+        <path class="drop" style="animation-duration: 0.7s; animation-delay: -0.6s" d="M 110,10 L 125,20 L 115,35 Z"
+            fill="#cbd5e1" />
+
+        <!-- Crusher Body -->
+        <rect x="70" y="80" width="60" height="120" fill="#334155" rx="8" />
+
+        <!-- Moving Jaw -->
+        <!-- The origin is top center for crusing pivot -->
+        <g transform="translate(120, 80)">
+            <polygon class="crusher-jaw" points="0,0 20,0 10,120 -10,120" fill="#38bdf8" />
+            <circle cx="10" cy="10" r="5" fill="#0f172a" />
+        </g>
+
+        <!-- Left Static Jaw -->
+        <polygon points="75,80 90,80 90,200 70,200" fill="#94a3b8" />
+
+        <!-- Crushed rocks falling -->
+        <circle cx="100" cy="200" r="8" fill="#cbd5e1" class="drop" style="animation-duration: 0.6s;" />
+        <circle cx="90" cy="210" r="5" fill="#94a3b8" class="drop"
+            style="animation-duration: 0.6s; animation-delay: -0.2s;" />
+        <circle cx="110" cy="205" r="6" fill="#cbd5e1" class="drop"
+            style="animation-duration: 0.6s; animation-delay: -0.4s;" />
+
+        <!-- Conveyor 1: Carrying crushed ore to mill -->
+        <g transform="translate(80, 270)">
+            <!-- Belt Support -->
+            <line x1="0" y1="20" x2="260" y2="80" stroke="#334155" stroke-width="6" stroke-linecap="round" />
+            <!-- Rollers -->
+            <circle cx="0" cy="10" r="10" fill="#475569" class="spin" />
+            <circle cx="130" cy="40" r="10" fill="#475569" class="spin" />
+            <circle cx="260" cy="70" r="10" fill="#475569" class="spin" />
+            <!-- The Animated Belt -->
+            <path d="M 0 0 L 260 60" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" class="belt-line" />
+
+            <!-- Material flowing on the tilted belt -->
+            <g stroke="#94a3b8" stroke-width="6" stroke-linecap="round" transform="rotate(13)">
+                <line x1="20" y1="2" x2="20" y2="2" class="flow-rock" style="animation-delay: 0s;" />
+                <line x1="20" y1="2" x2="20" y2="2" class="flow-rock" style="animation-delay: -0.4s;" />
+                <line x1="20" y1="2" x2="20" y2="2" class="flow-rock" style="animation-delay: -0.8s;" />
+                <line x1="20" y1="2" x2="20" y2="2" class="flow-rock" style="animation-delay: -1.2s;" />
+                <line x1="20" y1="2" x2="20" y2="2" class="flow-rock" style="animation-delay: -1.6s;" />
+            </g>
+        </g>
+
+        <!-- Structural Stand -->
+        <path d="M 60 210 L 40 370 L 60 370 Z" fill="#1e293b" />
+        <path d="M 140 220 L 160 370 L 140 370 Z" fill="#1e293b" />
+    </g>
+
+
+    <!-- ==========================================
+       STAGE 2: GRINDING (Ball Mill)
+       ========================================== -->
+    <g transform="translate(450, 270)">
+        <!-- Base Engine/Drive -->
+        <rect x="50" y="210" width="200" height="40" rx="10" fill="#334155" />
+        <path d="M 80 210 L 100 130 L 120 210 Z" fill="#475569" />
+        <path d="M 180 210 L 200 130 L 220 210 Z" fill="#475569" />
+
+        <!-- Huge Cylindrical Ball Mill -->
+        <!-- Represents cross-section or side view -->
+        <g transform="translate(150, 100)">
+            <!-- Backing -->
+            <circle cx="0" cy="0" r="110" fill="#1e293b" />
+
+            <!-- The spinning inner drum -->
+            <g class="spin-slow">
+                <circle cx="0" cy="0" r="100" fill="none" stroke="#475569" stroke-width="16" />
+                <circle cx="0" cy="0" r="100" fill="none" stroke="#38bdf8" stroke-width="4" stroke-dasharray="30 20" />
+                <line x1="0" y1="-100" x2="0" y2="100" stroke="#334155" stroke-width="4" />
+                <line x1="-100" y1="0" x2="100" y2="0" stroke="#334155" stroke-width="4" />
+                <!-- internal lifting bars -->
+                <circle cx="70" cy="70" r="15" fill="#64748b" />
+                <circle cx="-70" cy="-70" r="15" fill="#64748b" />
+                <circle cx="-70" cy="70" r="15" fill="#64748b" />
+                <circle cx="70" cy="-70" r="15" fill="#64748b" />
+                <circle cx="0" cy="0" r="25" fill="#0f172a" />
+            </g>
+            <!-- Drum Center Hub static -->
+            <circle cx="0" cy="0" r="15" fill="#38bdf8" />
+        </g>
+
+        <!-- Powdered Flow Output -->
+        <path class="drop" style="animation-duration: 0.5s;" d="M 260,120 A 10,10 0 0,0 270,140 A 10,10 0 0,0 260,120"
+            fill="#06b6d4" opacity="0.8" />
+        <path class="drop" style="animation-duration: 0.5s; animation-delay: -0.25s;"
+            d="M 265,115 A 8,8 0 0,0 275,135 A 8,8 0 0,0 265,115" fill="#fbbf24" opacity="0.6" />
+
+        <!-- Conveyor 2 (Slurry / Pump Line representation) -->
+        <!-- Geometric pipe instead of belt for wet process -->
+        <g transform="translate(260, 150)">
+            <path d="M 0 0 L 40 40 L 160 40 L 220 120" fill="none" stroke="#475569" stroke-width="18"
+                stroke-linejoin="round" />
+            <!-- Inner flowing liquid effect -->
+            <path d="M 0 0 L 40 40 L 160 40 L 220 120" fill="none" stroke="#06b6d4" stroke-width="6"
+                stroke-linejoin="round" class="belt-line" stroke-dasharray="10 15" filter="url(#cyanGlow)" />
+        </g>
+    </g>
+
+
+    <!-- ==========================================
+       STAGE 3: FLOTATION (Froth Flotation Tank)
+       ========================================== -->
+    <g transform="translate(880, 200)">
+
+        <!-- Pipe entering the tank -->
+        <!-- Connected from the end of the previous pipe -->
+
+        <!-- Main Flotation Tank back wall -->
+        <path d="M 30,80 L 30,280 Q 30,310 60,310 L 180,310 Q 210,310 210,280 L 210,80 Z" fill="#1e293b"
+            stroke="#334155" stroke-width="6" />
+
+        <!-- Liquid inside -->
+        <path d="M 35,120 L 35,280 Q 35,305 60,305 L 180,305 Q 205,305 205,280 L 205,120 Z" fill="url(#liquidGrad)" />
+
+        <!-- Agitator Mechanism -->
+        <g transform="translate(120, 40)">
+            <!-- Motor Top -->
+            <rect x="-20" y="0" width="40" height="30" fill="#38bdf8" rx="4" />
+            <polygon points="-15,0 15,0 10,-20 -10,-20" fill="#64748b" />
+            <circle cx="0" cy="15" r="10" fill="#0f172a" class="spin" />
+
+            <!-- Shaft -->
+            <line x1="0" y1="30" x2="0" y2="240" stroke="#94a3b8" stroke-width="8" />
+
+            <!-- Spinning Impeller at the bottom -->
+            <g transform="translate(0, 240)">
+                <polygon class="spin-fast" points="-40,-10 40,10 40,30 -40,10" fill="#f8fafc" opacity="0.9" />
+                <polygon class="spin-fast" points="-10,-40 10,40 30,40 10,-40" fill="#e2e8f0" opacity="0.8" />
+            </g>
+
+            <!-- Bubbles (Rising and expanding) -->
+            <!-- With varied delays and positions -->
+            <circle cx="-50" cy="220" r="10" fill="#ffffff" class="bubble" style="animation-delay: 0s;" />
+            <circle cx="40" cy="230" r="6" fill="#fbbf24" class="bubble" style="animation-delay: -0.4s;"
+                filter="url(#goldGlow)" />
+            <circle cx="-30" cy="200" r="12" fill="#ffffff" class="bubble" style="animation-delay: -0.8s;" />
+            <circle cx="60" cy="210" r="8" fill="#fbbf24" class="bubble" style="animation-delay: -1.2s;" />
+            <circle cx="-10" cy="180" r="15" fill="#ffffff" class="bubble" style="animation-delay: -1.6s;" />
+            <circle cx="20" cy="240" r="10" fill="#fbbf24" class="bubble" style="animation-delay: -0.2s;"
+                filter="url(#goldGlow)" />
+        </g>
+
+        <!-- Froth Overflow / Concentrate (Squash and Stretch acting here as Froth expanding) -->
+        <g transform="translate(120, 110)">
+            <circle cx="-60" cy="0" r="22" fill="#eab308" class="froth" style="animation-delay: 0s;" />
+            <circle cx="-30" cy="-10" r="28" fill="#facc15" class="froth" style="animation-delay: -0.3s;" />
+            <circle cx="0" cy="-15" r="30" fill="#fbbf24" class="froth" style="animation-delay: -0.6s;"
+                filter="url(#goldGlow)" />
+            <circle cx="30" cy="-10" r="28" fill="#facc15" class="froth" style="animation-delay: -0.9s;" />
+            <circle cx="60" cy="0" r="22" fill="#eab308" class="froth" style="animation-delay: -1.2s;" />
+
+            <!-- Concentrate flowing out to the right launder -->
+            <path d="M 80,0 Q 110,0 120,40" fill="none" stroke="#fbbf24" stroke-width="12" stroke-linecap="round"
+                filter="url(#goldGlow)" class="belt-line" stroke-dasharray="15 10" />
+        </g>
+
+        <!-- Flotation Tank Front Glass/Outline -->
+        <path d="M 30,80 L 30,280 Q 30,310 60,310 L 180,310 Q 210,310 210,280 L 210,80" fill="none" stroke="#cbd5e1"
+            stroke-width="4" opacity="0.3" />
+
+        <!-- Concentrated Pipe to Thickener -->
+        <g transform="translate(240, 150)">
+            <path d="M 0 0 L 80 80 L 120 80" fill="none" stroke="#475569" stroke-width="16" stroke-linejoin="round" />
+            <path d="M 0 0 L 80 80 L 120 80" fill="none" stroke="#fbbf24" stroke-width="8" stroke-linejoin="round"
+                class="belt-line" stroke-dasharray="10 8" filter="url(#goldGlow)" />
+        </g>
+
+    </g>
+
+
+    <!-- ==========================================
+       STAGE 4: THICKENING & FILTRATION
+       ========================================== -->
+    <g transform="translate(1200, 200)">
+
+        <!-- Giant V-Shaped Thickener Tank -->
+        <!-- Base geometric support -->
+        <path d="M 160 280 L 160 320" stroke="#334155" stroke-width="20" />
+        <polygon points="120,320 200,320 180,500 140,500" fill="#1e293b" />
+
+        <!-- The V Tank Background -->
+        <polygon points="20,100 300,100 200,280 120,280" fill="#1e293b" stroke="#475569" stroke-width="6" />
+
+        <!-- The Graduated Liquid Content inside -->
+        <polygon points="30,120 290,120 195,275 125,275" fill="url(#thickenerGrad)" />
+        <!-- Top water layer clarity -->
+        <ellipse cx="160" cy="120" rx="130" ry="15" fill="#38bdf8" opacity="0.6" />
+
+        <!-- Central Rake Mechanism -->
+        <g transform="translate(160, 60)">
+            <!-- Top Motor/Bridge -->
+            <rect x="-40" y="0" width="80" height="20" fill="#94a3b8" />
+            <polygon points="-60,20 60,20 40,40 -40,40" fill="#64748b" />
+            <circle cx="0" cy="10" r="6" fill="#0f172a" class="spin" />
+
+            <!-- Main Shaft -->
+            <line x1="0" y1="40" x2="0" y2="210" stroke="#f1f5f9" stroke-width="6" />
+
+            <!-- Rotating Rake Arms (2.5D projection sweep) -->
+            <g transform="translate(0, 210)">
+                <g class="rake-arm">
+                    <line x1="-30" y1="-50" x2="0" y2="0" stroke="#f8fafc" stroke-width="5" stroke-linecap="round" />
+                    <line x1="30" y1="-50" x2="0" y2="0" stroke="#f8fafc" stroke-width="5" stroke-linecap="round" />
+                    <!-- Rake blades -->
+                    <line x1="-20" y1="-35" x2="-20" y2="-15" stroke="#f8fafc" stroke-width="3" />
+                    <line x1="-10" y1="-20" x2="-10" y2="-5" stroke="#f8fafc" stroke-width="3" />
+                    <line x1="10" y1="-20" x2="10" y2="-5" stroke="#f8fafc" stroke-width="3" />
+                    <line x1="20" y1="-35" x2="20" y2="-15" stroke="#f8fafc" stroke-width="3" />
+                </g>
+            </g>
+        </g>
+
+        <!-- Clear Water Overflow Pipeline -->
+        <path d="M 290,120 L 330,120 L 330,300" fill="none" stroke="#475569" stroke-width="12"
+            stroke-linejoin="round" />
+        <path d="M 290,120 L 330,120 L 330,300" fill="none" stroke="#38bdf8" stroke-width="4" stroke-linejoin="round"
+            class="belt-line" stroke-dasharray="8 8" />
+
+        <!-- Final High-Grade Valued Underflow Drop -->
+        <g transform="translate(160, 280)">
+            <path class="drop" style="animation-duration: 1.2s;" d="M -8,10 Q 0,25 8,10 Q 0,0 -8,10 Z" fill="#facc15"
+                filter="url(#goldGlow)" />
+            <path class="drop" style="animation-duration: 1.2s; animation-delay: -0.6s;"
+                d="M -12,15 Q 0,35 12,15 Q 0,-5 -12,15 Z" fill="#eab308" filter="url(#goldGlow)" />
+        </g>
+
+        <!-- Geometric Golden Bucket / Final Product Container -->
+        <g transform="translate(160, 360)">
+            <!-- Outer diamond/hexagon shape -->
+            <polygon points="0,-20 40,0 20,50 -20,50 -40,0" fill="#f59e0b" filter="url(#goldGlow)" class="pulse-gold" />
+            <polygon points="0,-10 25,5 10,40 -10,40 -25,5" fill="#fef08a" class="pulse-gold"
+                style="animation-delay: -0.5s;" />
+            <text x="0" y="25" fill="#0f172a" font-weight="bold" font-family="sans-serif" font-size="14"
+                text-anchor="middle" letter-spacing="1">GOLD</text>
+        </g>
+
+    </g>
+
+    <!-- Ambient Floating Particles across the screen (Dust / Scale) -->
+    <g fill="#cbd5e1" opacity="0.3">
+        <circle cx="200" cy="100" r="3" class="spin-slow" />
+        <circle cx="800" cy="50" r="2" class="spin-slow" style="animation-delay: -2s;" />
+        <circle cx="1400" cy="150" r="4" class="spin-slow" style="animation-delay: -5s;" />
+        <rect x="600" y="400" width="6" height="6" class="spin" />
+        <polygon points="1000,450 1010,460 1000,470 990,460" class="spin" style="animation-direction: reverse;" />
+    </g>
+
+</svg>
